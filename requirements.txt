@@ -1,0 +1,13 @@
+streamlit
+openai
+python-dotenv
+tinydb
+langchain
+langchain-core
+pydantic
+typing_extensions
+langchain_openai
+langchain_groq
+logging
+pymongo[svr]==4.13.0
+requests

@@ -1,0 +1,1 @@
+from Output_structure.output_fomatter import real_time_text_generator,real_time_image_generator,real_time_image_text_generator

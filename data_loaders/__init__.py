@@ -1,0 +1,3 @@
+from data_loaders.tinydb_access import product_data_fetcher,demographics_data_fetcher 
+from data_loaders.mongo_client import Mongodb_insert
+from data_loaders.json_reader import json_data_fetcher
