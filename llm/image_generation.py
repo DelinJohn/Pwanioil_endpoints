@@ -1,25 +1,33 @@
 from langchain_core.messages import HumanMessage, SystemMessage
-from data_loaders import product_data_fetcher,demographics_data_fetcher
+from data_loaders import product_data_fetcher
 from llm.model_loader import load_llm
 from config import get_config
-from utils import base64_to_image
-from openai import OpenAI
-import logging
+from utils import log_execution_time
+from openai import AsyncOpenAI
+from utils.logger import setup_logger 
+import time
+import aiofiles
+
+
 
 from pathlib import Path
-
-import base64
-
+import json
 
 
-llm=load_llm()
+logger=setup_logger('image_generation')
 
-async def  image_llm(image_prompt,product_info,image_location,history):
-    try:    
 
-        image_path = Path(f"image_data/{image_location}")
-        with image_path.open("rb") as f:
-            image_bytes = f.read()
+
+
+async def  image_llm(image_prompt,product_info,image_location,history,in_time):
+    try:
+        logger.info('Started Image geenration')
+        llm=await load_llm()    
+        path=image_location
+        image_path = Path(path)
+        async with aiofiles.open(image_path, "rb") as f:
+            image_bytes = await f.read()
+
 
         
         
@@ -27,10 +35,10 @@ async def  image_llm(image_prompt,product_info,image_location,history):
         config=get_config()
         key=config['KEY']
         
-        product_details = product_data_fetcher("USHINDI","LAUNDRY BAR")
+        product_details = await product_data_fetcher("USHINDI","LAUNDRY BAR")
         # competitor_list = competitor_data_collector(product, competitors, category)
         # location_data, gender_data, locality_data = demographics_data_fetcher(gender, region, urban_or_rural)
-
+        prompt_creator_time=time.time()
         messages = [
         SystemMessage("""
 ROLE: You are a top-tier advertising strategist creating culturally resonant visual prompts.
@@ -69,22 +77,33 @@ REQUIREMENTS:
 
 
     ]
-        logging.info(f"Image LLM:Prompt: {messages}")
         
-        prompt= llm.invoke(messages).content
-        logging.info(f"Image LLM Response prompt: {prompt}")
+        
+        prompt= await  llm.ainvoke(messages)
+        prompt=prompt.content
+        
+        duration = time.time() - prompt_creator_time
+        logger.info(f"/prompt_generator_llm: {duration:.3f} sec")
 
-        client = OpenAI(api_key=key)
-        img = client.images.edit(
+
+        duration = time.time() - in_time
+        logger.info(f"/prompt_generator complete: {duration:.3f} sec")   
+        
+        start_time=time.time()
+        client = AsyncOpenAI(api_key=key)
+        img = await client.images.edit(
             model="gpt-image-1",  
             image=("input_image.png", image_bytes),
             prompt=prompt,
             size="1536x1024"
         )
-
+        duration = time.time() - start_time
+        logger.info(f"/image model only: {duration:.3f} sec")    
+        
         
 
         return img.data[0].b64_json,prompt
     
     except Exception as e:
-        raise Exception(f"An Error with image generation module {e}")
+        logger.error(f"Image generation failed: {str(e)}", exc_info=True)
+        raise

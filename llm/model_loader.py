@@ -11,7 +11,7 @@ load_dotenv()
 
         
 
-def load_llm():
+async def load_llm():
 
     try:
         config=get_config()

@@ -4,7 +4,7 @@ import logging
 
 
 
-def product_data_fetcher(brand, category):
+async def product_data_fetcher(brand, category):
 
     try:    
         db = TinyDB("data_bases/product_database.json")

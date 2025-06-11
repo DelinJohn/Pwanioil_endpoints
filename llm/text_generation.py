@@ -1,17 +1,22 @@
 from langchain_core.messages import HumanMessage, SystemMessage
-from data_loaders import product_data_fetcher,demographics_data_fetcher
+from data_loaders import product_data_fetcher
 from llm.model_loader import load_llm
-import logging
+from utils.logger import setup_logger
+
+import time
+
+
+logger=setup_logger('text_generation')
 
 
 
 
-llm=load_llm()
-
-async def Text_llm(text_prompt,product_data,history=[]):
+async def Text_llm(text_prompt,product_data,history,in_time):
     try:
+        logger.info("started text generation")
+        llm=await load_llm()
         
-        product_details = product_data_fetcher("USHINDI","LAUNDRY BAR")
+        product_details = await product_data_fetcher("USHINDI","LAUNDRY BAR")
         # competitor_list = competitor_data_collector(product, competitors, category)
         # location_data, gender_data, locality_data = demographics_data_fetcher(gender, region, urban_or_rural)
 
@@ -73,11 +78,13 @@ CONTENT FORMAT:
 """)]
 
 
-        result = llm.invoke(messages)
-        logging.info(f"LLM Response: {result.content}")
-        logging.info(f"LLM:Prompt: {messages}")
+        result = await llm.ainvoke(messages)
+        duration = time.time() - in_time
+        logger.info(f"/image latency: {duration:.3f} sec")    
+        
         return result.content
     
 
     except Exception as e:
-        raise Exception(f"Error with producing the output for text generation module{e}")
+        logger.error(f"Error with producing the output for text generation module{str(e)}")
+        raise 

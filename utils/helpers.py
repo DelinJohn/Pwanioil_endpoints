@@ -1,6 +1,7 @@
 import base64
 from io import BytesIO
-
+import time
+from functools import wraps
 import re
 
 
@@ -29,3 +30,18 @@ def normalize_output_type(text: str) -> str:
         return "text"
     else:
         return "unknown"
+    
+
+
+def log_execution_time(logger):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            logger.debug(f"Started: {func.__name__}")
+            result = func(*args, **kwargs)
+            elapsed = time.time() - start_time
+            logger.info(f"{func.__name__} took {elapsed:.3f} seconds")
+            return result
+        return wrapper
+    return decorator
