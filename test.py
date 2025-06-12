@@ -7,6 +7,7 @@ import nest_asyncio
 from io import BytesIO
 import base64
 from datetime import datetime
+import time
 
 
 nest_asyncio.apply()
@@ -28,7 +29,7 @@ def json_data_fetcher(product_loction:str):
     - rest_data: all other keys excluding the above
     
     """
-    with open(f"data_bases/{product_loction}", "r", encoding="utf-8") as f:
+    with open(f"{product_loction}", "r", encoding="utf-8") as f:
         payload= json.load(f)
     output_type = payload.get("output_type")
     image_prompt = payload.get("image_instructions")
@@ -53,34 +54,42 @@ def base64_to_image(img):
 
 
 
-async def main(json_location,image_location=None):
+async def main(json_location,image_location):
     output_type, image_prompt, text_prompt, product_data = json_data_fetcher(json_location)
+    if image_location is None:
+            st.error("it is absent")
+            st.stop()
+    
     start_time = datetime.now()
 
     if output_type == "text":
+        if "text_results" not in st.session_state:
+            st.session_state.text_results = []
         json_payload = {
             "text_prompt": text_prompt,
-            "product_data": product_data
+            "product_data": product_data,
+            "time":time.time()
         }
         async with httpx.AsyncClient(timeout=300.0) as client:
             async with client.stream("POST", "http://127.0.0.1:8000/text", json=json_payload) as response:
-                if "text_results" not in st.session_state:
-                    st.session_state.text_results = []
+                
                 async for text in response.aiter_text():
                     text=json.loads(text)
                     if text:
-                        st.session_state.text_results.append(text['text'])
-                        st.write(text['text'])
+                        st.session_state.text_results.append(text)
+                        st.write(text)
 
                         
 
 
 
     if output_type=="image":
+        
         json_payload={
         "image_prompt":image_prompt,
         "product_data":product_data,
-        "image_location":image_location
+        "image_location":image_location,
+        "time":time.time()
         }
         
         async with httpx.AsyncClient(timeout=300.0) as client:
@@ -103,19 +112,24 @@ async def main(json_location,image_location=None):
         "text_prompt":text_prompt,
         "product_data":product_data,
         "image_location":image_location,
+        "time":time.time()
         }
+        st.write("Payload being sent:")
+        st.json(json_payload)
         async with httpx.AsyncClient(timeout=300.0) as client:
             async with client.stream("POST", "http://127.0.0.1:8000/image_and_text", json=json_payload) as response:
                 
                 if "text_results" not in st.session_state:
                     st.session_state.text_results = []
-                async for text in response.aiter_text():
+                async for text in response.aiter_lines():
                     if text:
                         text=json.loads(text)
                         st.session_state.text_results.append(text)
                         image_data = base64.b64decode(text['image'])
                         image = BytesIO(image_data)
+                        st.write(text['text'])
                         st.image(image)
+                        
     
     end_time = datetime.now()
     elapsed = (end_time - start_time).total_seconds() / 60  # in minutes
@@ -127,19 +141,16 @@ async def main(json_location,image_location=None):
 st.title("AI Content Generator")
 
 json_location = st.text_input("Enter JSON location path")
-image_location = st.text_input("Enter image location path (optional)")
+image_location = st.text_input("Enter image location path")
+
+
 
 # Initialize output
-if "output" not in st.session_state:
-    st.session_state.output = ""
 
 if st.button("Generate"):
-    st.session_state.output = ""  # Clear old output
+    
 
     # Run the async logic
     asyncio.run(main(json_location, image_location))
-
-
-
 
 

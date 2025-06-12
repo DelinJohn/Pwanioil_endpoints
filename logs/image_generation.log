@@ -383,3 +383,61 @@ openai.InternalServerError: Error code: 500 - {'error': {'message': 'The server 
 2025-06-11 15:13:57 [INFO] image_generation: /prompt_generator_llm: 12.464 sec
 2025-06-11 15:13:57 [INFO] image_generation: /prompt_generator complete: 12.589 sec
 2025-06-11 15:15:07 [INFO] image_generation: /image model only: 69.911 sec
+2025-06-11 15:49:18 [INFO] image_generation: Started Image geenration
+2025-06-11 15:49:26 [INFO] image_generation: /prompt_generator_llm: 7.776 sec
+2025-06-11 15:49:26 [INFO] image_generation: /prompt_generator complete: 8.046 sec
+2025-06-11 15:50:45 [INFO] image_generation: /image model only: 78.897 sec
+2025-06-11 15:50:45 [INFO] image_generation: Started Image geenration
+2025-06-11 15:50:53 [INFO] image_generation: /prompt_generator_llm: 8.802 sec
+2025-06-11 15:50:53 [INFO] image_generation: /prompt_generator complete: 8.841 sec
+2025-06-11 15:52:07 [INFO] image_generation: /image model only: 73.330 sec
+2025-06-11 15:52:07 [INFO] image_generation: Started Image geenration
+2025-06-11 15:52:14 [INFO] image_generation: /prompt_generator_llm: 6.618 sec
+2025-06-11 15:52:14 [INFO] image_generation: /prompt_generator complete: 6.751 sec
+2025-06-11 15:53:28 [INFO] image_generation: /image model only: 74.865 sec
+2025-06-12 06:31:54 [INFO] image_generation: Started Image geenration
+2025-06-12 06:32:09 [INFO] image_generation: /prompt_generator_llm: 14.480 sec
+2025-06-12 06:32:09 [INFO] image_generation: /prompt_generator complete: 14.656 sec
+2025-06-12 06:33:22 [INFO] image_generation: /image model only: 72.728 sec
+2025-06-12 06:33:22 [INFO] image_generation: Started Image geenration
+2025-06-12 06:33:35 [INFO] image_generation: /prompt_generator_llm: 13.213 sec
+2025-06-12 06:33:35 [INFO] image_generation: /prompt_generator complete: 13.253 sec
+2025-06-12 06:34:54 [INFO] image_generation: /image model only: 79.283 sec
+2025-06-12 06:34:54 [INFO] image_generation: Started Image geenration
+2025-06-12 06:35:06 [INFO] image_generation: /prompt_generator_llm: 11.281 sec
+2025-06-12 06:35:06 [INFO] image_generation: /prompt_generator complete: 11.405 sec
+2025-06-12 06:36:13 [INFO] image_generation: /image model only: 67.576 sec
+2025-06-12 06:53:54 [INFO] image_generation: Started Image geenration
+2025-06-12 06:54:03 [INFO] image_generation: /prompt_generator_llm: 9.109 sec
+2025-06-12 06:54:03 [INFO] image_generation: /prompt_generator complete: 9.266 sec
+2025-06-12 06:55:11 [INFO] image_generation: /image model only: 68.175 sec
+2025-06-12 06:55:11 [INFO] image_generation: Started Image geenration
+2025-06-12 06:57:07 [INFO] image_generation: Started Image geenration
+2025-06-12 06:57:15 [INFO] image_generation: /prompt_generator_llm: 7.901 sec
+2025-06-12 06:57:15 [INFO] image_generation: /prompt_generator complete: 7.919 sec
+2025-06-12 06:58:18 [INFO] image_generation: /image model only: 63.032 sec
+2025-06-12 06:58:18 [INFO] image_generation: Started Image geenration
+2025-06-12 06:59:40 [INFO] image_generation: Started Image geenration
+2025-06-12 06:59:50 [INFO] image_generation: /prompt_generator_llm: 9.887 sec
+2025-06-12 06:59:50 [INFO] image_generation: /prompt_generator complete: 9.903 sec
+2025-06-12 07:01:03 [INFO] image_generation: /image model only: 73.514 sec
+2025-06-12 07:01:03 [INFO] image_generation: Started Image geenration
+2025-06-12 07:01:12 [INFO] image_generation: /prompt_generator_llm: 9.012 sec
+2025-06-12 07:01:12 [INFO] image_generation: /prompt_generator complete: 9.112 sec
+2025-06-12 07:02:27 [INFO] image_generation: /image model only: 74.639 sec
+2025-06-12 07:02:27 [INFO] image_generation: Started Image geenration
+2025-06-12 07:02:37 [INFO] image_generation: /prompt_generator_llm: 9.652 sec
+2025-06-12 07:02:37 [INFO] image_generation: /prompt_generator complete: 9.670 sec
+2025-06-12 07:03:42 [INFO] image_generation: /image model only: 65.828 sec
+2025-06-12 07:06:48 [INFO] image_generation: Started Image geenration
+2025-06-12 07:06:55 [INFO] image_generation: /prompt_generator_llm: 6.866 sec
+2025-06-12 07:06:55 [INFO] image_generation: /prompt_generator complete: 6.918 sec
+2025-06-12 07:08:04 [INFO] image_generation: /image model only: 69.330 sec
+2025-06-12 07:08:04 [INFO] image_generation: Started Image geenration
+2025-06-12 07:08:13 [INFO] image_generation: /prompt_generator_llm: 8.459 sec
+2025-06-12 07:08:13 [INFO] image_generation: /prompt_generator complete: 8.499 sec
+2025-06-12 07:09:28 [INFO] image_generation: /image model only: 75.109 sec
+2025-06-12 07:09:28 [INFO] image_generation: Started Image geenration
+2025-06-12 07:09:37 [INFO] image_generation: /prompt_generator_llm: 8.898 sec
+2025-06-12 07:09:37 [INFO] image_generation: /prompt_generator complete: 8.969 sec
+2025-06-12 07:10:41 [INFO] image_generation: /image model only: 64.176 sec

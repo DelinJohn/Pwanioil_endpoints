@@ -30,3 +30,12 @@
 2025-06-11 14:28:33 [ERROR] Output_fomatter: Real time image and text generator have malfunctionedunhandled errors in a TaskGroup (1 sub-exception)
 2025-06-11 14:35:47 [ERROR] Output_fomatter: Real time image and text generator have malfunctionedunhandled errors in a TaskGroup (1 sub-exception)
 2025-06-11 15:15:07 [INFO] Output_fomatter: /image iterator: 253.718 sec
+2025-06-11 15:53:28 [INFO] Output_fomatter: /image iterator: 250.776 sec
+2025-06-12 06:36:13 [INFO] Output_fomatter: /image iterator: 258.940 sec
+2025-06-12 06:37:50 [ERROR] Output_fomatter: Real time text generator have malfunctionedText_llm() missing 1 required positional argument: 'in_time'
+2025-06-12 06:41:45 [INFO] Output_fomatter: /image iterator: 17.292 sec
+2025-06-12 06:52:48 [ERROR] Output_fomatter: Real time image generator have malfunctionedimage_llm() missing 1 required positional argument: 'in_time'
+2025-06-12 06:53:49 [ERROR] Output_fomatter: Real time image generator have malfunctionedimage_llm() missing 1 required positional argument: 'in_time'
+2025-06-12 07:03:42 [INFO] Output_fomatter: /image iterator: 242.715 sec
+2025-06-12 07:06:15 [INFO] Output_fomatter: /image iterator: 6.509 sec
+2025-06-12 07:10:41 [INFO] Output_fomatter: /image iterator: 233.032 sec

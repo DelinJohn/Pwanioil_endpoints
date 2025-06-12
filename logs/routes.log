@@ -72,3 +72,13 @@
 2025-06-11 15:01:37 [INFO] routes: 0.018586158752441406
 2025-06-11 15:10:53 [INFO] routes: /image and text latency: 0.018 sec
 2025-06-11 15:10:53 [INFO] routes: 0.01817464828491211
+2025-06-12 06:44:12 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:45:46 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:45:58 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:47:08 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:49:15 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:49:48 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:51:04 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:51:05 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:51:05 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-12 06:51:33 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given

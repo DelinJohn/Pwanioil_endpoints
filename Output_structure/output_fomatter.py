@@ -9,14 +9,16 @@ import time
 logger=setup_logger('Output_fomatter')
 
 
-async def real_time_text_generator(text_prompt,product_data,time):
+async def real_time_text_generator(text_prompt,product_data,in_time):
 
     try:
         history = []
         for i in range(3):
-            result = await Text_llm(text_prompt,product_data, history)
+            result = await Text_llm(text_prompt,product_data, history,time.time())
             history.append(result)
             yield json.dumps({"text": result}) + "\n"
+        duration = time.time() - in_time
+        logger.info(f"/image iterator: {duration:.3f} sec")     
     except Exception as e:
         logger.error(f'Real time text generator have malfunctioned{e}')
         raise       
@@ -25,15 +27,17 @@ async def real_time_text_generator(text_prompt,product_data,time):
 
         
         
-@log_execution_time(logger)
-async def real_time_image_generator(image_prompt,product_data,image_location):
+
+async def real_time_image_generator(image_prompt,product_data,image_location,in_time):
     try:
         history = []
         
         for i in range(3):
-            result, prompt = await image_llm(image_prompt,product_data,image_location, history)
+            result, prompt = await image_llm(image_prompt,product_data,image_location, history,time.time())
             history.append(prompt)
             yield json.dumps({"image": result})+ "\n"
+        duration = time.time() - in_time
+        logger.info(f"/image iterator: {duration:.3f} sec") 
     except Exception as e:
         logger.error(f'Real time image generator have malfunctioned{e}')
         raise    

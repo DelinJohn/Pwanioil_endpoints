@@ -52,7 +52,7 @@ async def complete_output(input_data:InputData):
 class TextInputData(BaseModel):
     text_prompt:str
     product_data: Dict[str, Any]
-    time:float
+    
 
 
 
@@ -60,26 +60,25 @@ class TextInputData(BaseModel):
 
 
 @app.post('/text')
-def text_output(input_data:TextInputData):
+async def text_output(input_data:TextInputData):
 
     try:
-        duration = time.time() - input_data.time
-        logger.info(f"/image latency: {duration:.3f} sec")    
+          
         
 
 
         return StreamingResponse(real_time_text_generator(input_data.text_prompt,
-                                                        input_data.product_data),media_type="text/event-stream")
+                                                        input_data.product_data,time.time()),media_type="text/event-stream")
     except Exception as e:
         logger.error(f"Error in /text: {str(e)}")
-        return JSONResponse(status_code=500, content={"error": "Failed to generate image and text"})
+        return JSONResponse(status_code=500, content={"error": f"Failed to generate output {str(e)}"})
 
 
 class ImageInputData(BaseModel):
     image_prompt:str
     product_data: Dict[str, Any]
     image_location:str
-    time:float
+    
 
 
 
@@ -87,16 +86,15 @@ class ImageInputData(BaseModel):
 
 
 @app.post('/image')
-def image_output(input_data:ImageInputData):
+async def image_output(input_data:ImageInputData):
     try:    
-        duration = time.time() - input_data.time
-        logger.info(f"/image latency: {duration:.3f} sec")
+        
         return StreamingResponse(real_time_image_generator(input_data.image_prompt,
                                                         input_data.product_data,
-                                                        input_data.image_location),media_type="text/event-stream")
+                                                        input_data.image_location,time.time()),media_type="text/event-stream")
     except Exception as e:
         logger.error(f"Error in /image: {str(e)}")
-        return JSONResponse(status_code=500, content={"error": "Failed to generate text"})
+        return JSONResponse(status_code=500, content={"error":f"Failed to generate output {str(e)}"})
     
 
 
@@ -108,15 +106,13 @@ class ImageTextData(BaseModel):
     text_prompt:str
     product_data: Dict[str, Any]
     image_location:str
-    time:float
+    
 
 
 @app.post('/image_and_text')
-def image_and_text_output(input_data:ImageTextData):
+async def image_and_text_output(input_data:ImageTextData):
     try:    
-        duration = time.time() - input_data.time
-        logger.info(f"/image and text latency: {duration:.3f} sec")
-        logger.info(time.time()-input_data.time)
+        
         return StreamingResponse(real_time_image_text_generator(input_data.image_prompt,
                                                             input_data.text_prompt,
                                                             input_data.product_data,
@@ -124,7 +120,7 @@ def image_and_text_output(input_data:ImageTextData):
                                                             time.time()),media_type="text/event-stream")
     except Exception as e:
         logger.error(f"Error in /image and text: {str(e)}")
-        return JSONResponse(status_code=500, content={"error": "Failed to generate text"})
+        return JSONResponse(status_code=500, content={"error": f"Failed to generate output {str(e)}"})
 
 
 
