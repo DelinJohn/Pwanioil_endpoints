@@ -48,9 +48,9 @@ def json_data_fetcher(product_loction:str):
 
 
 def base64_to_image(img):
-    image_bytes = base64.b64decode(img.data[0].b64_json)
-    image_io = BytesIO(image_bytes)
-    return image_io
+    image_data = base64.b64decode(img)
+    image = BytesIO(image_data)
+    return image
 
 
 
@@ -63,22 +63,21 @@ async def main(json_location,image_location):
     start_time = datetime.now()
 
     if output_type == "text":
-        if "text_results" not in st.session_state:
-            st.session_state.text_results = []
+        
         json_payload = {
             "text_prompt": text_prompt,
             "product_data": product_data
            
         }
         async with httpx.AsyncClient(timeout=300.0) as client:
-            async with client.stream("POST", "http://127.0.0.1:8000/text", json=json_payload) as response:
-                
-                async for text in response.aiter_lines():
-                    text=json.loads(text)
-                    if text:
-                        st.session_state.text_results.append(text)
-                        st.write(text)
-
+            result= await client.post( "http://127.0.0.1:8000/text_new", json=json_payload)
+            result=result.json()
+            st.write(result['output_1'])
+            
+            st.write(result['output_2'])
+   
+            st.write(result['output_3'])
+           
                         
 
 
@@ -96,15 +95,12 @@ async def main(json_location,image_location):
         st.write("Payload being sent:")
         
         async with httpx.AsyncClient(timeout=300.0) as client:
-            async with client.stream("POST", "http://127.0.0.1:8000/image", json=json_payload) as response:
-                
-                async for text in response.aiter_lines():
-                    if text:
-                        st.session_state.text_results.append(text)
-                        text=json.loads(text)
-                        image_data = base64.b64decode(text['image'])
-                        image = BytesIO(image_data)
-                        st.image(image)
+            result= await client.post( "http://127.0.0.1:8000/image_new", json=json_payload)
+            result=result.json()
+            st.image(base64_to_image(result["result1"]))
+            st.image(base64_to_image(result["result2"]))
+            st.image(base64_to_image(result["result3"]))
+            
 
 
 
@@ -116,21 +112,21 @@ async def main(json_location,image_location):
         "product_data":product_data,
         "image_location":image_location
         }
-        st.write("Payload being sent:")
-        st.json(json_payload)
+       
         async with httpx.AsyncClient(timeout=300.0) as client:
-            async with client.stream("POST", "http://127.0.0.1:8000/image_and_text", json=json_payload) as response:
+            result= await client.post( "http://127.0.0.1:8000/image_and_text_new", json=json_payload)
+            result=result.json()
+            st.write(result['text']['output_1'])
+            st.image(base64_to_image(result['image_result']["result1"]))
+            st.write(result['text']['output_2'])
+            st.image(base64_to_image(result['image_result']["result2"]))
+            st.write(result['text']['output_3'])
+            st.image(base64_to_image(result['image_result']["result3"]))
+
+
+
+        
                 
-                if "text_results" not in st.session_state:
-                    st.session_state.text_results = []
-                async for text in response.aiter_lines():
-                    if text:
-                        text=json.loads(text)
-                        st.session_state.text_results.append(text)
-                        image_data = base64.b64decode(text['image'])
-                        image = BytesIO(image_data)
-                        st.write(text['text'])
-                        st.image(image)
                         
     
     end_time = datetime.now()
