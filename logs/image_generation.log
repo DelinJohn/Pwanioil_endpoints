@@ -441,3 +441,4 @@ openai.InternalServerError: Error code: 500 - {'error': {'message': 'The server 
 2025-06-12 07:09:37 [INFO] image_generation: /prompt_generator_llm: 8.898 sec
 2025-06-12 07:09:37 [INFO] image_generation: /prompt_generator complete: 8.969 sec
 2025-06-12 07:10:41 [INFO] image_generation: /image model only: 64.176 sec
+2025-06-15 09:27:22 [INFO] image_generation: /image model only: 78.637 sec

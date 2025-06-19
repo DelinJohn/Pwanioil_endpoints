@@ -1,4 +1,5 @@
 from Output_structure import real_time_text_generator,real_time_image_generator,real_time_image_text_generator
+from llm import text_llm_new,image_llm_new
 from typing import Optional
 from fastapi import FastAPI
 from typing import Dict, Any
@@ -8,7 +9,8 @@ import json
 from data_loaders import json_data_fetcher
 from utils.logger import setup_logger
 import time
-
+import asyncio
+import traceback
 
 logger=setup_logger('routes')
 
@@ -63,15 +65,23 @@ class TextInputData(BaseModel):
 async def text_output(input_data:TextInputData):
 
     try:
-          
-        
-
-
         return StreamingResponse(real_time_text_generator(input_data.text_prompt,
                                                         input_data.product_data,time.time()),media_type="text/event-stream")
     except Exception as e:
         logger.error(f"Error in /text: {str(e)}")
         return JSONResponse(status_code=500, content={"error": f"Failed to generate output {str(e)}"})
+    
+
+
+
+@app.post('/text_new')
+async def text_output(input_data:TextInputData):
+
+    try:
+        return JSONResponse(content=await text_llm_new(input_data.text_prompt,input_data.product_data))
+    except Exception as e:
+        logger.error(f"Error in /text: {str(e)}")
+        return JSONResponse(status_code=500, content={"error": f"Failed to generate output {str(e)}"})    
 
 
 class ImageInputData(BaseModel):
@@ -88,7 +98,6 @@ class ImageInputData(BaseModel):
 @app.post('/image')
 async def image_output(input_data:ImageInputData):
     try:    
-        
         return StreamingResponse(real_time_image_generator(input_data.image_prompt,
                                                         input_data.product_data,
                                                         input_data.image_location,time.time()),media_type="text/event-stream")
@@ -96,6 +105,17 @@ async def image_output(input_data:ImageInputData):
         logger.error(f"Error in /image: {str(e)}")
         return JSONResponse(status_code=500, content={"error":f"Failed to generate output {str(e)}"})
     
+
+
+
+
+@app.post('/image_new')
+async def image_output(input_data:ImageInputData):
+    try:    
+        return JSONResponse(content=await image_llm_new(input_data.image_prompt, input_data.product_data, input_data.image_location))
+    except Exception as e:
+        logger.error(f"Error in /image: {str(e)}")
+        return JSONResponse(status_code=500, content={"error":f"Failed to generate output {str(e)}"})    
 
 
 
@@ -125,7 +145,43 @@ async def image_and_text_output(input_data:ImageTextData):
 
 
 
+@app.post('/image_and_text_new')
+async def image_and_text_output(input_data: ImageTextData):
+    try:
+        image_result = None
+        text_result = None
 
+        async with asyncio.TaskGroup() as tg:
+            image_task = tg.create_task(
+                image_llm_new(input_data.image_prompt, input_data.product_data, input_data.image_location)
+            )
+            text_task = tg.create_task(
+                text_llm_new(input_data.text_prompt, input_data.product_data)
+            )
+
+        # If either task failed, .result() will raise
+        try:
+            image_result = image_task.result()
+        except Exception as e:
+            logger.error(f"❌ Image generation failed: {str(e)}")
+            traceback.print_exc()
+            image_result = {"error": f"Image generation failed: {str(e)}"}
+
+        try:
+            text_result = text_task.result()
+        except Exception as e:
+            logger.error(f"❌ Text generation failed: {str(e)}")
+            traceback.print_exc()
+            text_result = {"error": f"Text generation failed: {str(e)}"}
+
+        return JSONResponse(content={
+            "text": text_result,
+            "image_result": image_result
+        })
+
+    except Exception as e:
+        logger.error(f"🔥 UNCAUGHT ERROR in /image_and_text_new: {str(e)}", exc_info=True)
+        return JSONResponse(status_code=500, content={"error": f"Server error: {str(e)}"})
 
 
         

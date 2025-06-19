@@ -82,3 +82,208 @@
 2025-06-12 06:51:05 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
 2025-06-12 06:51:05 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
 2025-06-12 06:51:33 [ERROR] routes: Error in /image: real_time_image_generator() takes 3 positional arguments but 4 were given
+2025-06-15 09:20:04 [ERROR] routes: Error in /image and text: unhandled errors in a TaskGroup (1 sub-exception)
+2025-06-15 09:23:25 [ERROR] routes: Error in /image and text: unhandled errors in a TaskGroup (1 sub-exception)
+2025-06-16 06:58:53 [ERROR] routes: Error in /text: real_time_text_generator() missing 1 required positional argument: 'in_time'
+2025-06-16 07:00:24 [ERROR] routes: Error in /text: Object of type coroutine is not JSON serializable
+2025-06-16 07:01:16 [ERROR] routes: Error in /text: Object of type coroutine is not JSON serializable
+2025-06-16 07:07:10 [ERROR] routes: Error in /image: Object of type coroutine is not JSON serializable
+2025-06-16 07:07:45 [ERROR] routes: Error in /image: Object of type coroutine is not JSON serializable
+2025-06-16 07:13:51 [ERROR] routes: Error in /image: [Errno 2] No such file or directory: 'Ushindi Laundry Bar.png'
+2025-06-16 11:54:19 [ERROR] routes: Error in /image: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************5w0A. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-06-18 09:30:33 [ERROR] routes: 🔥 UNCAUGHT ERROR in /image_and_text_new: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/delin/Coding/pwani_oil/utils/routes.py", line 154, in image_and_text_output
+  |     async with asyncio.TaskGroup() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 71, in __aexit__
+  |     return await self._aexit(et, exc)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 164, in _aexit
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/delin/Coding/pwani_oil/llm/image_rethink.py", line 103, in image_llm_new
+    |     prompt= await  structured_llm.ainvoke(messages)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 3089, in ainvoke
+    |     input = await asyncio.create_task(part(), context=context)  # type: ignore
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5453, in ainvoke
+    |     return await self.bound.ainvoke(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 353, in ainvoke
+    |     llm_result = await self.agenerate_prompt(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 905, in agenerate_prompt
+    |     return await self.agenerate(
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 863, in agenerate
+    |     raise exceptions[0]
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1033, in _agenerate_with_cache
+    |     result = await self._agenerate(
+    |              ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_openai/chat_models/base.py", line 1129, in _agenerate
+    |     response = await self.root_async_client.beta.chat.completions.parse(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/resources/beta/chat/completions.py", line 437, in parse
+    |     return await self._post(
+    |            ^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1767, in post
+    |     return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1461, in request
+    |     return await self._request(
+    |            ^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1562, in _request
+    |     raise self._make_status_error_from_response(err.response) from None
+    | openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************5w0A. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+    +------------------------------------
+2025-06-18 09:30:51 [ERROR] routes: 🔥 UNCAUGHT ERROR in /image_and_text_new: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/delin/Coding/pwani_oil/utils/routes.py", line 154, in image_and_text_output
+  |     async with asyncio.TaskGroup() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 71, in __aexit__
+  |     return await self._aexit(et, exc)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 164, in _aexit
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/delin/Coding/pwani_oil/llm/image_rethink.py", line 103, in image_llm_new
+    |     prompt= await  structured_llm.ainvoke(messages)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 3089, in ainvoke
+    |     input = await asyncio.create_task(part(), context=context)  # type: ignore
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5453, in ainvoke
+    |     return await self.bound.ainvoke(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 353, in ainvoke
+    |     llm_result = await self.agenerate_prompt(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 905, in agenerate_prompt
+    |     return await self.agenerate(
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 863, in agenerate
+    |     raise exceptions[0]
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1033, in _agenerate_with_cache
+    |     result = await self._agenerate(
+    |              ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_openai/chat_models/base.py", line 1129, in _agenerate
+    |     response = await self.root_async_client.beta.chat.completions.parse(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/resources/beta/chat/completions.py", line 437, in parse
+    |     return await self._post(
+    |            ^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1767, in post
+    |     return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1461, in request
+    |     return await self._request(
+    |            ^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1562, in _request
+    |     raise self._make_status_error_from_response(err.response) from None
+    | openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************5w0A. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+    +------------------------------------
+2025-06-18 09:31:24 [ERROR] routes: 🔥 UNCAUGHT ERROR in /image_and_text_new: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/delin/Coding/pwani_oil/utils/routes.py", line 154, in image_and_text_output
+  |     async with asyncio.TaskGroup() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 71, in __aexit__
+  |     return await self._aexit(et, exc)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 164, in _aexit
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/delin/Coding/pwani_oil/llm/image_rethink.py", line 103, in image_llm_new
+    |     prompt= await  structured_llm.ainvoke(messages)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 3089, in ainvoke
+    |     input = await asyncio.create_task(part(), context=context)  # type: ignore
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5453, in ainvoke
+    |     return await self.bound.ainvoke(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 353, in ainvoke
+    |     llm_result = await self.agenerate_prompt(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 905, in agenerate_prompt
+    |     return await self.agenerate(
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 863, in agenerate
+    |     raise exceptions[0]
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1033, in _agenerate_with_cache
+    |     result = await self._agenerate(
+    |              ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_openai/chat_models/base.py", line 1129, in _agenerate
+    |     response = await self.root_async_client.beta.chat.completions.parse(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/resources/beta/chat/completions.py", line 437, in parse
+    |     return await self._post(
+    |            ^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1767, in post
+    |     return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1461, in request
+    |     return await self._request(
+    |            ^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1562, in _request
+    |     raise self._make_status_error_from_response(err.response) from None
+    | openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************5w0A. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+    +------------------------------------
+2025-06-18 09:32:49 [ERROR] routes: 🔥 UNCAUGHT ERROR in /image_and_text_new: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/delin/Coding/pwani_oil/utils/routes.py", line 154, in image_and_text_output
+  |     async with asyncio.TaskGroup() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 71, in __aexit__
+  |     return await self._aexit(et, exc)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/asyncio/taskgroups.py", line 164, in _aexit
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/delin/Coding/pwani_oil/llm/image_rethink.py", line 103, in image_llm_new
+    |     prompt= await  structured_llm.ainvoke(messages)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 3089, in ainvoke
+    |     input = await asyncio.create_task(part(), context=context)  # type: ignore
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5453, in ainvoke
+    |     return await self.bound.ainvoke(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 353, in ainvoke
+    |     llm_result = await self.agenerate_prompt(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 905, in agenerate_prompt
+    |     return await self.agenerate(
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 863, in agenerate
+    |     raise exceptions[0]
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1033, in _agenerate_with_cache
+    |     result = await self._agenerate(
+    |              ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/langchain_openai/chat_models/base.py", line 1129, in _agenerate
+    |     response = await self.root_async_client.beta.chat.completions.parse(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/resources/beta/chat/completions.py", line 437, in parse
+    |     return await self._post(
+    |            ^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1767, in post
+    |     return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1461, in request
+    |     return await self._request(
+    |            ^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/delin/anaconda3/envs/AI_projects/lib/python3.12/site-packages/openai/_base_client.py", line 1562, in _request
+    |     raise self._make_status_error_from_response(err.response) from None
+    | openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************5w0A. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+    +------------------------------------

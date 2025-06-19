@@ -2,7 +2,7 @@ from llm import Text_llm,image_llm
 import json
 import asyncio
 from utils.logger import setup_logger 
-from utils import log_execution_time
+
 import time
 
 
@@ -80,6 +80,3 @@ async def real_time_image_text_generator(image_prompt,text_prompt,product_data,i
     except Exception as e:
         logger.error(f'Real time image and text generator have malfunctioned{e}')
         raise     
-
-       
-        

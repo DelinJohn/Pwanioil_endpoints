@@ -67,13 +67,13 @@ async def main(json_location,image_location):
             st.session_state.text_results = []
         json_payload = {
             "text_prompt": text_prompt,
-            "product_data": product_data,
-            "time":time.time()
+            "product_data": product_data
+           
         }
         async with httpx.AsyncClient(timeout=300.0) as client:
             async with client.stream("POST", "http://127.0.0.1:8000/text", json=json_payload) as response:
                 
-                async for text in response.aiter_text():
+                async for text in response.aiter_lines():
                     text=json.loads(text)
                     if text:
                         st.session_state.text_results.append(text)
@@ -84,24 +84,27 @@ async def main(json_location,image_location):
 
 
     if output_type=="image":
+        if "text_results" not in st.session_state:
+                    st.session_state.text_results = []
         
         json_payload={
         "image_prompt":image_prompt,
         "product_data":product_data,
-        "image_location":image_location,
-        "time":time.time()
+        "image_location":image_location
+       
         }
+        st.write("Payload being sent:")
         
         async with httpx.AsyncClient(timeout=300.0) as client:
             async with client.stream("POST", "http://127.0.0.1:8000/image", json=json_payload) as response:
-                if "text_results" not in st.session_state:
-
-                    st.session_state.text_results = []
-                async for text in response.aiter_text():
+                
+                async for text in response.aiter_lines():
                     if text:
                         st.session_state.text_results.append(text)
-                        st.write(text['text'])
-                        st.write(text['image'])
+                        text=json.loads(text)
+                        image_data = base64.b64decode(text['image'])
+                        image = BytesIO(image_data)
+                        st.image(image)
 
 
 
@@ -111,8 +114,7 @@ async def main(json_location,image_location):
         "image_prompt":image_prompt,
         "text_prompt":text_prompt,
         "product_data":product_data,
-        "image_location":image_location,
-        "time":time.time()
+        "image_location":image_location
         }
         st.write("Payload being sent:")
         st.json(json_payload)
@@ -152,5 +154,8 @@ if st.button("Generate"):
 
     # Run the async logic
     asyncio.run(main(json_location, image_location))
+
+
+
 
 

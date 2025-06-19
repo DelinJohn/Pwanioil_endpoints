@@ -2,7 +2,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from data_loaders import product_data_fetcher
 from llm.model_loader import load_llm
 from config import get_config
-from utils import log_execution_time
+
 from openai import AsyncOpenAI
 from utils.logger import setup_logger 
 import time
@@ -15,6 +15,7 @@ import json
 
 
 logger=setup_logger('image_generation')
+llm=load_llm()
 
 
 
@@ -22,7 +23,7 @@ logger=setup_logger('image_generation')
 async def  image_llm(image_prompt,product_info,image_location,history,in_time):
     try:
         logger.info('Started Image geenration')
-        llm=await load_llm()    
+            
         path=image_location
         image_path = Path(path)
         async with aiofiles.open(image_path, "rb") as f:
